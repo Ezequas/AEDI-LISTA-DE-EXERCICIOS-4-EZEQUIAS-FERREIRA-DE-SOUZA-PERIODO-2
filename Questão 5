@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+int main() {
+    int n, valor, esquerda, direita, meio, encontrado = 0;
+
+    printf("Digite o número de elementos: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        printf("Digite o elemento %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+
+    printf("Digite o valor a ser pesquisado: ");
+    scanf("%d", &valor);
+
+    
+    esquerda = 0;
+    direita = n - 1;
+    while (esquerda <= direita) {
+        meio = (esquerda + direita) / 2;
+        if (arr[meio] == valor) {
+            encontrado = 1;
+            break;
+        } else if (arr[meio] < valor) {
+            esquerda = meio + 1;
+        } else {
+            direita = meio - 1;
+        }
+    }
+
+    if (encontrado) {
+        printf("Valor encontrado na posição %d.\n", meio);
+    } else {
+        printf("Valor não encontrado.\n");
+    }
+
+    return 0;
+}
